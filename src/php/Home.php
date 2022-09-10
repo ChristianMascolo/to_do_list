@@ -1,3 +1,19 @@
+<?php
+    $username="";
+    $numeri_incompleti="";
+    $media_voti="";
+    $voto_maggiore="";
+    $mysqli=mysqli("localhost","php","password","ToDoList");
+
+    //check error connection
+    if($mysqli->connect_errno){
+        echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+        exit();
+    }
+
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
