@@ -100,12 +100,29 @@
             <button type="submit" >Aggiungi</button>
         </form>
     </div>
-    <table>
-            <tr>
-                <th>Uncompleted</th>
-                <th>Completed</th>
-            </tr>
-    </table> 
+    <?php
+        $mysqli = new mysqli("localhost","php","password","ToDoList","3306");
+        $query = $mysqli->query("SELECT * FROM Task");
+
+        if($query->num_rows > 0){
+            echo "  <table>
+                        <thead>
+                            <th>Task</th>
+                            <th>Stato</th>
+                        </thead><tbody>";
+            while($query->fetch_array()){
+                    echo "<tr>".$query['task']."</tr>>".
+                         "<tr>".$query['completed']."</tr>".
+                         "</tbody>";
+            };
+
+            echo "</table>";
+        }else{
+            echo "Non sono presenti task nel database.";
+        }
+
+        $mysqli->close();
+    ?>
 </body>
 </body>
 </html>
