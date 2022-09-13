@@ -84,13 +84,18 @@
         <a >Home</a>
         <a href="TaskList.php">Task List</a>
         <div class="dropdown">
-            <button class="dropbtn">Area Personale
-                <i class="fa fa-caret-down"></i>
+            <button class="dropbtn">
+              <?php 
+                    if(empty($_SESSION['user'])){?>
+                        Guest
+              <?php }else{
+                        $_SESSION['user']->uname;   
+                }?>
             </button>
             <div class="dropdown-content">
-                <a href="#">Area Personale</a>
-                <a href="#">Login</a>
-                <a href="#">Logout</a>
+                <a href="Login.html">Login</a>
+                <a href="Register.html">Registrati</a>
+                <a href="">Logout</a>
             </div>
         </div>
     </div> 

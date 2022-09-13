@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON ToDoList.* to 'php'@'localhost';
 DROP TABLE IF EXISTS User;
 CREATE TABLE User(
     uname varchar(15) not null,
-    pwd varchar(15) not null,
+    pwd varchar(250) not null,
 
     primary key(uname)
 );

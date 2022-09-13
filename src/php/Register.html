@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+        }
+
+        form{
+            display:flex;
+            flex-direction: column;
+            width:300 px;
+        }
+        
+        form>input{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="Register.php">
+        <h2>Registrazione</h2>
+        <label>Username:</label> <input type="text" id="uname" name="uname">
+        <label>Password:</label> <input type="password" id="pwd" name="pwd">
+        <input type="submit" value="Registrati">
+        <p>Se hai già un account clicca <a href="Login.html">qui</a></p>
+    </form>
+</body>
+</html>
