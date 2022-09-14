@@ -13,8 +13,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             $row = $result->fetch_array(MYSQLI_ASSOC);
             if($pwd === $row['pwd']){
                 session_start();
-                $_SESSION['username'] = $row['uname'];
                 $_SESSION['logged'] = true;
+                setcookie("uname",$row['uname']);
                 header("location: AreaPersonale.php");
             }else{
                 echo "La password non è corretta";

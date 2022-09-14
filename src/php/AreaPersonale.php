@@ -17,6 +17,7 @@
 <body>
     <h1>Benvenuto</h1>
     <?php
-        echo "Ciao " . $_SESSION["username"];
+        echo "Ciao " . $_COOKIE["uname"];
     ?>
+    <a href="Home.php">Home</a>
 </body>

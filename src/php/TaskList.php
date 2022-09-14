@@ -1,3 +1,15 @@
+<?php
+    require_once("Connection.php");
+
+    if(!session_start()){
+        echo "sessione non avviata";
+    }else{
+        if(!isset($_SESSION['logged']) || $_SESSION['logged'] !== true){
+            header("location :Login.html");
+            exit;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,49 +92,63 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="Home.php">Home</a>
+        <a >Home</a>
         <a href="TaskList.php">Task List</a>
         <div class="dropdown">
-            <button class="dropbtn">Area Personale
-                <i class="fa fa-caret-down"></i>
+            <button class="dropbtn">
+                <?php 
+                    if(empty($_COOKIE["uname"])){?>
+                    Guest
+                    <div class="dropdown-content">
+                        <a href="Login.html">Login</a>
+                        <a href="Register.html">Registrati</a>
+                    </div>
+                <?php }else{
+                        echo $_COOKIE["uname"];?>   
+                        <div class="dropdown-content">
+                            <a href="Login.html">Login</a>
+                            <a href="Logout.php">Logout</a>
+                        </div>
+                <?php }?>
             </button>
-            <div class="dropdown-content">
-                <a href="#">Area Personale</a>
-                <a href="#">Login</a>
-                <a href="#">Logout</a>
-            </div>
         </div>
-    </div>
+    </div> 
     <div>
-        <form method="post" action="">
+        <form method="post" action="AddTask.php">
             <label>Aggiungi una task</label><br>
-            <input type="text" id="task" name="task">
+                <input type="text" id="task" name="task">
+                <input type="hidden" id="uname" name="uname" value=<?php echo $_COOKIE["uname"];?>>
             <button type="submit" >Aggiungi</button>
         </form>
     </div>
     <?php
-        $mysqli = new mysqli("localhost","php","password","ToDoList","3306");
-        $query = $mysqli->query("SELECT * FROM Task");
+         $query = "SELECT * FROM Task";
+         $result = $connessione->query($query);
 
-        if($query->num_rows > 0){
-            echo "  <table>
-                        <thead>
-                            <th>Task</th>
-                            <th>Stato</th>
-                        </thead><tbody>";
-            while($query->fetch_array()){
-                    echo "<tr>".$query['task']."</tr>>".
-                         "<tr>".$query['completed']."</tr>".
-                         "</tbody>";
-            };
-
-            echo "</table>";
-        }else{
-            echo "Non sono presenti task nel database.";
-        }
-
-        $mysqli->close();
-    ?>
-</body>
+         if($result->num_rows === 0){
+            echo "Non ci sono task nel database,aggiungi la prima!";
+         }else{?>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th>Stato</th>
+                    </tr>
+                    <?php
+                        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+                            if($row["completed"] == 0){
+                                echo "<tr>
+                                        <td>".$row["task"]."</td>".
+                                        "<td>Non completata</td>
+                                     </tr>";
+                            }else{
+                                echo "<tr>
+                                        <td>".$row["task"]."</td>".
+                                        "<td>Completata</td>
+                                      </tr>";
+                            }
+                        }
+                    ?>
+                </table>
+    <?php } ?>
 </body>
 </html>

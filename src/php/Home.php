@@ -85,18 +85,21 @@
         <a href="TaskList.php">Task List</a>
         <div class="dropdown">
             <button class="dropbtn">
-              <?php 
-                    if(empty($_SESSION['user'])){?>
-                        Guest
-              <?php }else{
-                        $_SESSION['user']->uname;   
-                }?>
+                <?php 
+                    if(empty($_COOKIE["uname"])){?>
+                    Guest
+                    <div class="dropdown-content">
+                        <a href="Login.html">Login</a>
+                        <a href="Register.html">Registrati</a>
+                    </div>
+                <?php }else{
+                        echo $_COOKIE["uname"];?>   
+                        <div class="dropdown-content">
+                            <a href="Login.html">Login</a>
+                            <a href="Logout.php">Logout</a>
+                        </div>
+                <?php }?>
             </button>
-            <div class="dropdown-content">
-                <a href="Login.html">Login</a>
-                <a href="Register.html">Registrati</a>
-                <a href="">Logout</a>
-            </div>
         </div>
     </div> 
     
